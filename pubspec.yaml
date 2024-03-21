@@ -41,6 +41,8 @@ dependencies:
   provider: ^6.1.2
   flutter_local_notifications: ^8.2.0
   firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  firebase_database: ^10.4.10
 
  
 

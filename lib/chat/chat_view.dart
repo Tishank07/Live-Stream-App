@@ -5,10 +5,11 @@ import 'package:videosdk/videosdk.dart';
 class ChatView extends StatefulWidget {
   final Room room;
   final String displayName;
-   final Participant participant;
+   //final Participant participant;
   
 
-  const ChatView({Key? key, required this.room, required this.displayName, required this.participant});
+  const ChatView({Key? key, required this.room, required this.displayName,// required this.participant
+  });
 
   @override
   _ChatViewState createState() => _ChatViewState();

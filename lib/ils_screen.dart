@@ -8,12 +8,13 @@ class ILSScreen extends StatefulWidget {
   final String meetingId;
   final String token;
   final Mode mode;
+  final String email;
 
   const ILSScreen(
       {super.key,
       required this .meetingId,
       required this.token,
-      required this.mode,});
+      required this.mode, required this.email,});
 
   @override
   State<ILSScreen> createState() => _ILSScreenState();
@@ -29,7 +30,7 @@ class _ILSScreenState extends State<ILSScreen> {
     _room = VideoSDK.createRoom(
       roomId: widget.meetingId,
       token: widget.token,
-      displayName: "Paavan",
+      displayName: widget.email,
       micEnabled: true,
       camEnabled: true,
       defaultCameraIndex:
@@ -84,9 +85,9 @@ class _ILSScreenState extends State<ILSScreen> {
         //Showing the Speaker or Viewer View based on the mode
        body: isJoined
             ? widget.mode == Mode.CONFERENCE
-                ? ILSSpeakerView(room: _room)
+                ? ILSSpeakerView(room: _room, email: widget.email,)
                 : widget.mode == Mode.VIEWER
-                    ? ILSViewerView(room: _room)
+                    ? ILSViewerView(room: _room, email: widget.email)
                     : null
             : const Center(
                   child: Text("Joining...",

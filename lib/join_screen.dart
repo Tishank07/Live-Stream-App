@@ -6,8 +6,9 @@ import 'package:videosdk/videosdk.dart';
 
 class JoinScreen extends StatelessWidget {
   final _meetingIdController = TextEditingController();
+   final String email;
 
-  JoinScreen({Key? key});
+  JoinScreen({Key? key, required this.email});
 
   // Initialize FlutterLocalNotificationsPlugin
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -61,6 +62,7 @@ class JoinScreen extends StatelessWidget {
             meetingId: meetingId,
             token: token,
             mode: Mode.CONFERENCE,
+            email: email,
           ),
         ),
       );
@@ -81,6 +83,7 @@ class JoinScreen extends StatelessWidget {
             meetingId: meetingId,
             token: token,
             mode: mode,
+            email: email,
           ),
         ),
       );
@@ -106,6 +109,15 @@ class JoinScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+            ////////////////////////////////
+            Text(
+  'Welcome $email', // Display the welcome message with the email address
+  style: TextStyle(color: Colors.white),
+),
+
+///////////////////////////////////////////////
+
             // Creating a new meeting
             ElevatedButton(
               onPressed: () => onCreateButtonPressed(context),

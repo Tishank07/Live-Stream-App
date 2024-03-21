@@ -6,7 +6,8 @@ import 'package:videosdk_flutter_quickstart_ils/chat/chat_view.dart';
 
 class ILSViewerView extends StatefulWidget {
   final Room room;
-  const ILSViewerView({super.key, required this.room});
+  final String email; // Add email field
+  const ILSViewerView({super.key, required this.room,required this.email});
 
   @override
   State<ILSViewerView> createState() => _ILSViewerViewState();
@@ -27,8 +28,8 @@ class _ILSViewerViewState extends State<ILSViewerView> {
     //  ChatView(room: widget.room, displayName: "John Deo");
           ChatView(
   room: widget.room,
- displayName: widget.room.localParticipant.displayName,
-  participant: widget.room.localParticipant,
+ displayName: widget.email,
+ // participant: widget.room.localParticipant,
 ); 
 
 
@@ -74,8 +75,8 @@ class _ILSViewerViewState extends State<ILSViewerView> {
           // ChatView(room: widget.room, displayName: "John Deo"),       //chatbox called
                 ChatView(
   room: widget.room,
- displayName: widget.room.localParticipant.displayName,
-  participant: widget.room.localParticipant,
+ displayName: widget.email,
+ // participant: widget.room.localParticipant,
 ),
 
         ],
