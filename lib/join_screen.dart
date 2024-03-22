@@ -77,6 +77,10 @@ class JoinScreen extends StatelessWidget {
     var re = RegExp("\\w{4}\\-\\w{4}\\-\\w{4}");
     if (meetingId.isNotEmpty && re.hasMatch(meetingId)) {
       _meetingIdController.clear();
+
+
+      //The "JoinScreen" allows users to create a new meeting or join an existing meeting. When a meeting is created or joined, the application navigates to the "ILSScreen":
+
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ILSScreen(
@@ -111,6 +115,7 @@ class JoinScreen extends StatelessWidget {
           children: [
 
             ////////////////////////////////
+            //The JoinScreen widget receives the email from the LoginScreen and displays a welcome message:
             Text(
   'Welcome $email', // Display the welcome message with the email address
   style: TextStyle(color: Colors.white),

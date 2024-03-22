@@ -4,15 +4,16 @@ import 'package:videosdk/videosdk.dart';
 
 class ChatView extends StatefulWidget {
   final Room room;
+  final Map<String, Participant> participants;
   final String displayName;
    //final Participant participant;
   
 
-  const ChatView({Key? key, required this.room, required this.displayName,// required this.participant
+  const ChatView({Key? key, required this.room, required this.participants, required this.displayName,
   });
 
   @override
-  _ChatViewState createState() => _ChatViewState();
+  _ChatViewState createState() => _ChatViewState();             //createState method to return an instance of _ChatViewState.
 }
 
 class _ChatViewState extends State<ChatView> {
@@ -20,7 +21,7 @@ class _ChatViewState extends State<ChatView> {
   final TextEditingController _messageController = TextEditingController();
 
   @override
-  void initState() {
+  void initState() {                      //initState() to initialize messages with an empty list.
     super.initState();
     messages = PubSubMessages(messages: []);
 
@@ -31,9 +32,9 @@ class _ChatViewState extends State<ChatView> {
     });
   }
 
-  void messageHandler(PubSubMessage message) {
+  void messageHandler(PubSubMessage message) {        //method messageHandler to handle incoming messages.
     setState(() {
-      messages.messages.add(message);
+      messages.messages.add(message);                 //Adds the received message to 'messages.messages' and triggers a UI update.
     });
   }
 
@@ -59,7 +60,7 @@ class _ChatViewState extends State<ChatView> {
                         padding: const EdgeInsets.all(8.0),
                         margin: const EdgeInsets.symmetric(vertical: 4.0),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0),                 //
+                          color: Colors.white.withOpacity(0),                 
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
                             color: Colors.white,
@@ -71,7 +72,8 @@ class _ChatViewState extends State<ChatView> {
                           // style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold), // Set text color to black and make display name bold
 
                           // message.message,
-                          '${widget.displayName}: ${message.message}',
+                          //'${widget.displayName}: ${message.message}',
+                          '${widget.participants[message.senderId]?.displayName ?? "Guest"}: ${message.message}',       // this code is used to generate a formatted string for displaying chat messages. It attempts to fetch the display name of the sender from the "participants" map using the "senderId" from the "message". If the display name is not available or null, it defaults to "Guest". The sender's name or "Guest" is then followed by a colon (:) and the actual message content from "message.message".
                           style: const TextStyle(color: Colors.white), // Set text color to white
                         ),
                       ),
@@ -99,13 +101,13 @@ class _ChatViewState extends State<ChatView> {
     widget.room.pubSub.publish(
       "CHAT",
       message,
-      const PubSubPublishOptions(persist: true),
+      const PubSubPublishOptions(persist: true),          //Publishes the message to the "CHAT" pub/sub channel.
     );
     _messageController.clear();
   }
 
   @override
-  void dispose() {
+  void dispose() {                                              // dispose method to unsubscribe from the "CHAT" channel when the widget is disposed
     widget.room.pubSub.unsubscribe("CHAT", messageHandler);
     super.dispose();
   }

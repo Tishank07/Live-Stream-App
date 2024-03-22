@@ -27,15 +27,15 @@ class _ILSScreenState extends State<ILSScreen> {
   @override
   void initState() {
     // create room when widget loads
+    //The "ILSScreen" widget receives the email from the JoinScreen and initializes a VideoSDK room to join a meeting:
     _room = VideoSDK.createRoom(
       roomId: widget.meetingId,
       token: widget.token,
       displayName: widget.email,
       micEnabled: true,
       camEnabled: true,
-      defaultCameraIndex:
-          1, // Index of MediaDevices will be used to set default camera
-      mode: widget.mode,
+      defaultCameraIndex: 1, // Index of MediaDevices will be used to set default camera
+      mode: widget.mode,      //Depending on the mode (Conference or Viewer), the "ILSScreen" will display either "ILSSpeakerView" or "ILSViewerView".
     );
 
     // setting the event listener for join and leave events

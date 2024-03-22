@@ -16,6 +16,7 @@ class ILSViewerView extends StatefulWidget {
 class _ILSViewerViewState extends State<ILSViewerView> {
   String hlsState = "HLS_STOPPED";
   String? downstreamUrl;
+  Map<String, Participant> participants = {};
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _ILSViewerViewState extends State<ILSViewerView> {
           ChatView(
   room: widget.room,
  displayName: widget.email,
+  participants: participants,
  // participant: widget.room.localParticipant,
 ); 
 
@@ -76,6 +78,7 @@ class _ILSViewerViewState extends State<ILSViewerView> {
                 ChatView(
   room: widget.room,
  displayName: widget.email,
+  participants: participants,
  // participant: widget.room.localParticipant,
 ),
 

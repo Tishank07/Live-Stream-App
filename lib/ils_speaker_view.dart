@@ -7,7 +7,10 @@ import 'package:videosdk_flutter_quickstart_ils/chat/chat_view.dart';
 
 class ILSSpeakerView extends StatefulWidget {
   final Room room;
+
+  //"ILSSpeakerView" widgets receive the email from the "ILSScreen":
    final String email; // Add email field
+   //The email is used to display the current user's name or identifier within the meeting:
 
   const ILSSpeakerView({Key? key, required this.room, required this.email}) : super(key: key);
 
@@ -128,10 +131,10 @@ class _ILSSpeakerViewState extends State<ILSSpeakerView> {
 
           ////////////////chat box/////////////////////////
 
-         ChatView(
-  room: widget.room,
- displayName: widget.email,
- // participant: widget.room.localParticipant,
+         ChatView(      //"ChatView" widget, which seems to be a custom widget for displaying and managing chat messages within the meeting.
+  room: widget.room,    // This passes the "room" object (presumably representing the VideoSDK room) to the "ChatView" widget. This allows the "ChatView" to interact with the room, possibly to send or receive chat messages.
+ displayName: widget.email,   // This passes the "email" from the widget's parent ("ILSSpeakerView") to the "ChatView". The "displayName" is likely used to identify the sender of chat messages from the local participant in the chat.
+ participants: participants,    // This passes a "Map<String, Participant>" named "participants" to the "ChatView". This map presumably contains information about the participants in the meeting. The "ChatView" can use this information to display names or identifiers of participants who send chat messages.
 ),
 
 
